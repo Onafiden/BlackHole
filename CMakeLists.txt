@@ -1,10 +1,29 @@
 cmake_minimum_required(VERSION 3.15)
-project(MyApp CXX)
+project(BlackHole)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(MyApp src/main.cpp)
+set(GLFW_DIR "C:/Users/Matvey/Documents/libs/glfw")
+set(GLEW_DIR "C:/Users/Matvey/Documents/libs/glew")
 
-target_include_directories(MyApp PRIVATE "C:/Libraries/glfw/include")
-target_link_directories(MyApp PRIVATE "C:/Libraries/glfw/libs")
-target_link_libraries(MyApp PRIVATE glfw3 opengl32 gdi32 user32 shell32)
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    "${GLFW_DIR}/include"
+    "${GLEW_DIR}/include"
+)
+
+target_link_directories(${PROJECT_NAME} PRIVATE 
+    "${GLFW_DIR}/libs"
+    "${GLEW_DIR}/libs/Release/x64"
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    "${GLEW_DIR}/libs/Release/x64/libglew32.a"
+    glfw3
+    opengl32
+    gdi32
+    user32
+    kernel32
+)
